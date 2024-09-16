@@ -2,8 +2,8 @@ import os
 import subprocess
 
 # Set input and output dirs
-input_dir = "/mnt/d/Fastq_files/BWS_whole_genome_sequence_raw_reads/"
-output_dir = "/mnt/d/Fastq_files/assembly/duplicated/"
+input_dir = "/mnt/d/Fastq_files/trimmed_fastq/stringent/"
+output_dir = "/mnt/d/Fastq_files/assembly/stringent/"
 
 os.makedirs(output_dir, exist_ok=True)
 
@@ -19,7 +19,7 @@ for filename in os.listdir(input_dir):
             if os.path.exists(out):
                 print("Assembly already exists")
                 continue
-            command = f"python3 SPAdes-4.0.0-Linux/bin/spades.py -1 {in1} -2 {in2} -o {out} -t 10 --isolate -m 8"
+            command = f"python3 SPAdes-4.0.0-Linux/bin/spades.py -1 {in1} -2 {in2} -o {out} -t 12 --isolate -m 8"
             print(f"Running command: {command}")
             subprocess.run(command, shell=True)
         else:

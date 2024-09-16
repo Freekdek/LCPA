@@ -3,7 +3,7 @@ import subprocess
 
 # Set input and output dirs
 input_dir = "/mnt/d/Fastq_files/BWS_whole_genome_sequence_raw_reads/"
-output_dir = "/mnt/d/Fastq_files/trimmed_fastq/"
+output_dir = "/mnt/d/Fastq_files/trimmed_fastq/stringent/"
 
 os.makedirs(output_dir, exist_ok=True)
 
@@ -17,7 +17,8 @@ for filename in os.listdir(input_dir):
 
         # Now run fastp command
         if os.path.exists(in2):
-            command = f"fastp --in1 {in1} --out1 {out1} --in2 {in2} --out2 {out2} -w 10"
+            # default: fastp --in1 {in1} --out1 {out1} --in2 {in2} --out2 {out2} -w 10
+            command = f"fastp --in1 {in1} --out1 {out1} --in2 {in2} --out2 {out2} -w 6 -q 30 -l 100 -D"
             print(f"Running command: {command}")
             subprocess.run(command, shell=True)
         else:
